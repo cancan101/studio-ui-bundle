@@ -31,7 +31,8 @@ export const FieldDefinitionCalculatedValueFormFields = (props: FieldDefinitionA
               { label: t('data-type.html'), value: 'html' },
               { label: t('data-type.number'), value: 'numeric' },
               { label: t('data-type.date'), value: 'date' },
-              { label: t('data-type.boolean'), value: 'boolean' }
+              { label: t('data-type.boolean'), value: 'boolean' },
+              { label: t('data-type.user'), value: 'user' }
             ] }
           />
         </Form.Item>

@@ -567,6 +567,7 @@ data-type.asset: Asset
 data-type.object: Object
 data-type.checkbox: Checkbox
 data-type.select: Select
+data-type.user: User
 open-data-object.button: Open Data Object
 open-data-object-modal.title: Open Data Object
 open-data-object-modal.label: Please enter the ID or Path of the data object
