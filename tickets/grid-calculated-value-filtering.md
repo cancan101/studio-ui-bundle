@@ -10,6 +10,8 @@ Upstream issue [pimcore/studio-ui-bundle#1957](https://github.com/pimcore/studio
 
 This ticket is that new feature request. A ready-to-file draft for the upstream issue is at the bottom; this document also tracks the implementation across the forks.
 
+> **Implementation design:** see [`grid-calculated-value-filtering-design.md`](./grid-calculated-value-filtering-design.md) for the verified current-state architecture and the concrete change set per repo.
+
 ## The idea
 
 Calculated values are computed at runtime by a calculator class/expression. The computed value *is* persisted to the `object_query_*` table on save (`CalculatedValue::getDataForQueryResource()`), but Pimcore cannot know whether that stored snapshot is trustworthy for querying: a calculator may depend on time, related objects, prices, or other external state, in which case the stored value goes stale and filtering on it would silently return wrong results.
