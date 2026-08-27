@@ -63,22 +63,56 @@ Current state (`2026.x`): `DynamicTypeObjectDataCalculatedValue` (`assets/js/src
 - Fields without the flag behave exactly as today (no filter offered).
 - Flipping the flag triggers/requires the documented reindex path.
 
-## Draft for the upstream issue (paste into pimcore/studio-ui-bundle → New issue)
+## Draft for the upstream issue (paste into pimcore/platform-version → New issue)
 
-**Title:** Allow marking Calculated Value fields as "safe for filtering" to enable grid filtering
+Filed against `pimcore/platform-version` because the change spans four packages (`pimcore/pimcore`, `generic-data-index-bundle`, `studio-backend-bundle`, `studio-ui-bundle`). The draft is self-contained — it names classes, services, and config keys, but references no repository files.
+
+**Title:** Allow marking Calculated Value fields as "safe for filtering" to enable grid filtering in Studio
 
 > ## Feature request
 >
-> Follow-up to #1957, as suggested by @fashxp in https://github.com/pimcore/studio-ui-bundle/issues/1957#issuecomment-5426685683.
+> Follow-up to pimcore/studio-ui-bundle#1957 (closed as not planned), where @fashxp suggested opening a dedicated issue for this idea: https://github.com/pimcore/studio-ui-bundle/issues/1957#issuecomment-5426685683. Filing it here rather than on a single bundle because the implementation touches four packages.
 >
-> Calculated values cannot currently be filtered in the Studio grid, because Pimcore cannot know whether the value snapshot persisted to `object_query_*` is trustworthy — a calculator may depend on time, related objects, or external state.
+> ## Problem
 >
-> **Proposal:** add an opt-in flag on the Calculated Value field definition (e.g. `safeForFiltering`) by which the developer declares the calculation to be a pure function of the object's own data. For such fields the persisted/indexed value is authoritative as of the last save, so grid filtering can be offered safely. We use filtering on calculated fields extensively in the classic admin-ui, and this would restore that capability in Studio in a sound way.
+> Calculated Value fields cannot be filtered (or sorted) in the Studio grid. The underlying reason is a trust problem, not a technical gap: the value available for querying is a snapshot taken when the object was saved or indexed, and Pimcore cannot know whether a given calculator is a pure function of the object's own data. A calculator that depends on the clock, related objects, or external services produces stale snapshots, and filtering on those would silently return wrong rows — so Studio currently disables it wholesale (`CalculatedValueDefinition` in the studio backend reports the column as neither filterable nor sortable).
 >
-> Sketch of the moving parts:
-> - `pimcore/pimcore`: new bool on `CalculatedValue` field definition; `isFilterable()` returns it (currently hardcoded `true`). Optionally a `PureCalculatorInterface` marker so the contract can live on the calculator class.
-> - `generic-data-index-bundle`: index the field when flagged, mapped per `elementType` (float/date/boolean/keyword) so numeric and date comparisons are typed correctly (the wrong-type comparison was the visible symptom in #1957); flag changes trigger reindex.
-> - `studio-backend-bundle`: report the column as filterable (with `elementType` in the config) and translate `system.number`/`system.string`/`system.datetime`/`system.boolean` filters for it.
-> - `studio-ui-bundle`: a delegating field-filter type for `calculatedValue` that picks String/Number/Datetime/BooleanSelect from the field's `elementType` (today the type inherits `FieldFilter/None`, so the column is excluded from the filter sidebar); plus the checkbox in the class editor form fields.
+> Many projects rely on filtering calculated fields extensively in the classic admin UI, so this is a real gap when moving to Studio.
 >
-> Default off, so existing installs are unaffected. I'm happy to work on a PR if the direction is agreed.
+> ## Proposal
+>
+> Add an opt-in flag on the Calculated Value field definition — working name `safeForFiltering` — by which the developer declares the calculation to be a pure function of the object's own persisted data. For flagged fields the stored/indexed snapshot is authoritative as of the last save, so the grid can offer filtering and sorting safely. Default `false`, so nothing changes for existing installs until a developer opts in.
+>
+> ## How it fits the current architecture (verified against the 2026.x sources)
+>
+> The groundwork mostly exists already:
+>
+> - Calculated values are **already indexed** by the generic data index: the `pimcore_generic_data_index.calculated_fields_index_mode` setting chooses between running the calculator at index time (`live`) or reading the saved query-table snapshot (`query_store`, via `CalculatedValueQueryStoreService`). However, the field type is mapped through `TextKeywordAdapter`, i.e. always indexed as text/keyword regardless of the field's `elementType` — which is exactly why numeric comparisons can never be correct today (the wrong-type comparison was the visible symptom in pimcore/studio-ui-bundle#1957).
+> - The studio backend already sends each grid column's `filterable` flag and full serialized field definition (including `elementType`) to the frontend.
+> - The Studio UI already has a delegation mechanism for object-data column filters (the `dataobject.adapter` field-filter type resolves the concrete filter per field type) — calculated value currently resolves to the "none" filter, which hides it from the filter sidebar.
+>
+> ## Proposed implementation
+>
+> 1. **pimcore/pimcore** — new `bool $safeForFiltering = false` (plus getter/setter) on the `CalculatedValue` field definition. Deliberately *not* reusing `isFilterable()`: that method governs the SQL listing API (`filterBy`/`getBy`) and already returns `true`, so changing it would break existing code. Optionally a `PureCalculatorInterface` marker so the purity contract can live on the calculator class itself. Documentation spells out the contract: "pure" means the result depends only on the object's own persisted data and is refreshed on each save/reindex.
+> 2. **generic-data-index-bundle** — a `CalculatedValueAdapter` replacing the `TextKeywordAdapter` registration for the `calculatedValue` field type. Unflagged fields keep today's text/keyword mapping and behavior (zero mapping diff for existing installs). Flagged fields are mapped per `elementType` — `numeric` → float, `boolean` → boolean — with robust string coercion in `normalize()`, since `query_store` mode delivers varchar snapshots. The mapping change on flagging a field goes through the existing class-definition reindex. (`date` support is a follow-up: the serialized format of date calculated values needs to be pinned down first; until then they stay on the string mapping and text filtering.)
+> 3. **studio-backend-bundle** — an additive field-definition-aware column definition interface so `CalculatedValueDefinition` can answer filterable/sortable per field (`true` only when the field is flagged); the column configuration service already holds the field definition at that point. No changes to filter application: the existing `system.number`/`system.string`/`system.boolean` column filters work once the index field is typed correctly.
+> 4. **studio-ui-bundle** — a small delegating field-filter type for `calculatedValue` that picks the Number/BooleanSelect/String filter from the field's `elementType`, plugged into the existing `dataobject.adapter` delegation (which already hands the filter component and request transform the field definition); the filter sidebar additionally honors the column's `filterable` flag from the backend (currently ignored); and a "safe for filtering" checkbox on the Calculated Value type in the class editor.
+>
+> Each step is independently mergeable and a no-op for users until all land and a field is flagged; there is no migration beyond the automatic reindex when a field's flag changes.
+>
+> ## Acceptance criteria
+>
+> - A flagged calculated value field with `elementType: numeric` offers the number filter, and `= 0` matches only rows whose computed value is 0 (the failure case from pimcore/studio-ui-bundle#1957).
+> - Flagged `input`/`textarea` fields offer the text filter and return matching rows; flagged `boolean` fields offer the boolean filter.
+> - Sorting works on flagged fields via the same declaration.
+> - Unflagged calculated value fields behave exactly as today.
+>
+> ## Open questions
+>
+> - Naming: `safeForFiltering` vs `pureCalculation` vs something else?
+> - Should the same flag enable sorting (this proposal says yes), or should the two be separate?
+> - Canonical serialization for `date` calculated values, so they can get a proper date mapping in a follow-up?
+> - Is the `PureCalculatorInterface` marker worth adding in v1?
+> - Should the classic admin UI also gate its calculated value grid filtering on the flag? That would resolve the original wrong-results bug there as well.
+>
+> I'm happy to work on the PRs if the direction is agreed.
