@@ -8,7 +8,7 @@ Upstream issue [pimcore/studio-ui-bundle#1957](https://github.com/pimcore/studio
 >
 > **fashxp (member)**: There is always the possibility to create custom filters to filter for certain fields. But I like the idea of marking fields save for filtering! Do you want to create a new issue for it?
 
-This ticket is that new feature request. A ready-to-file draft for the upstream issue is at the bottom; this document also tracks the implementation across the forks.
+This ticket is that new feature request. It has been **filed upstream as [pimcore/platform-version#419](https://github.com/pimcore/platform-version/issues/419)** (the change spans four packages, so the platform repo is the home); the draft it was filed from is preserved at the bottom. This document also tracks the implementation across the forks.
 
 > **Implementation design:** see [`grid-calculated-value-filtering-design.md`](./grid-calculated-value-filtering-design.md) for the verified current-state architecture and the concrete change set per repo.
 
@@ -63,7 +63,7 @@ Current state (`2026.x`): `DynamicTypeObjectDataCalculatedValue` (`assets/js/src
 - Fields without the flag behave exactly as today (no filter offered).
 - Flipping the flag triggers/requires the documented reindex path.
 
-## Draft for the upstream issue (paste into pimcore/platform-version → New issue)
+## Draft for the upstream issue (filed as pimcore/platform-version#419 on 2026-08-28)
 
 Filed against `pimcore/platform-version` because the change spans four packages (`pimcore/pimcore`, `generic-data-index-bundle`, `studio-backend-bundle`, `studio-ui-bundle`). The draft is self-contained — it names classes, services, and config keys, but references no repository files.
 
