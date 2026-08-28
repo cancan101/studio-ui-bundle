@@ -173,6 +173,13 @@ export const useFieldFilterEditor = (): UseFieldFilterEditorReturn => {
       return false
     }
 
+    // The backend reports per-field filterability for calculated value columns
+    // (safe-for-filtering declaration on the field definition); other column types
+    // don't consistently maintain the flag, so it is only enforced here.
+    if (column.frontendType === 'calculatedValue' && column.filterable === false) {
+      return false
+    }
+
     if (dynamicType === null) {
       return false
     }

@@ -162,6 +162,7 @@ export const serviceIds = {
   'DynamicTypes/FieldFilter/Time': 'DynamicTypes/FieldFilter/Time',
   'DynamicTypes/FieldFilter/Color': 'DynamicTypes/FieldFilter/Color',
   'DynamicTypes/FieldFilter/Relation': 'DynamicTypes/FieldFilter/Relation',
+  'DynamicTypes/FieldFilter/CalculatedValue': 'DynamicTypes/FieldFilter/CalculatedValue',
 
   'DynamicTypes/BatchEdit/Text': 'DynamicTypes/BatchEdit/Text',
   'DynamicTypes/BatchEdit/TextArea': 'DynamicTypes/BatchEdit/TextArea',

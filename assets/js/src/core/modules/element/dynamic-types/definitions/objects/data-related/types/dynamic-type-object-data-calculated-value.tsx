@@ -24,6 +24,9 @@ import { GridCellPreviewWrapper } from '../../grid-cell-preview/grid-cell-cell-p
 import { Tag } from '@Pimcore/components/tag/tag'
 import { formatDateTime } from '@Pimcore/utils/date-time'
 import { isEmpty, isNumber, isString } from 'lodash'
+import { type DynamicTypeFieldFilterAbstract } from '../../../field-filters/dynamic-type-field-filter-abstract'
+import { container } from '@Pimcore/app/depency-injection'
+import { serviceIds } from '@Pimcore/app/config/services/service-ids'
 
 export type CalculatedValueObjectDataDefinition = AbstractObjectDataDefinition & {
   elementType: string
@@ -33,6 +36,8 @@ export type CalculatedValueObjectDataDefinition = AbstractObjectDataDefinition &
 export class DynamicTypeObjectDataCalculatedValue extends DynamicTypeObjectDataAbstract {
   id: string = 'calculatedValue'
   isAllowedInBatchEdit: boolean = false
+
+  dynamicTypeFieldFilterType: DynamicTypeFieldFilterAbstract = container.get(serviceIds['DynamicTypes/FieldFilter/CalculatedValue'])
 
   getObjectDataComponent (props: CalculatedValueObjectDataDefinition): React.ReactElement<AbstractObjectDataDefinition> {
     return (

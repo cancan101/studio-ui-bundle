@@ -1023,6 +1023,8 @@ calculator-class: Calculator Class
 calculator-expression: Calculator Expression
 calculator-type: Calculator Type
 calculator-type-tooltip: See the official documentation to learn more about defining expressions or classes.
+safe-for-filtering: Safe for filtering
+safe-for-filtering-tooltip: Declares the calculation a pure function of the object's own data, so the stored value can be used for grid filtering and sorting. Do not enable if the calculation depends on other objects, the current time, or external services.
 expression: Expression
 lazy-loading: Lazy Loading
 disallow-add-remove: Disallow Add / Remove
