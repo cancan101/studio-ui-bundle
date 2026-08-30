@@ -12,6 +12,17 @@ This ticket is that new feature request. It has been **filed upstream as [pimcor
 
 > **Implementation design:** see [`grid-calculated-value-filtering-design.md`](./grid-calculated-value-filtering-design.md) for the verified current-state architecture and the concrete change set per repo.
 
+## Implementation status
+
+All four parts are implemented on branch `claude/pimcore-studio-ui-ticket-bf2dyb` of the respective `cancan101` forks:
+
+| Repo | Change | Validation |
+|---|---|---|
+| [pimcore](https://github.com/cancan101/pimcore/tree/claude/pimcore-studio-ui-ticket-bf2dyb) | `safeForFiltering` flag on `CalculatedValue` + docs | `php -l` (unit tests in CI) |
+| [generic-data-index-bundle](https://github.com/cancan101/generic-data-index-bundle/tree/claude/pimcore-studio-ui-ticket-bf2dyb) | flag-gated typed `CalculatedValueAdapter` + unit tests | logic executed against real classes (22 checks) |
+| [studio-backend-bundle](https://github.com/cancan101/studio-backend-bundle/tree/claude/pimcore-studio-ui-ticket-bf2dyb) | `FieldDefinitionAwareColumnDefinitionInterface`, per-field filterable/sortable + unit tests | logic executed against real classes |
+| [studio-ui-bundle](https://github.com/cancan101/studio-ui-bundle/tree/claude/pimcore-studio-ui-ticket-bf2dyb) | delegating filter type, filterable gate, class-editor switch + jest tests | eslint, tsc, full jest suite green |
+
 ## The idea
 
 Calculated values are computed at runtime by a calculator class/expression. The computed value *is* persisted to the `object_query_*` table on save (`CalculatedValue::getDataForQueryResource()`), but Pimcore cannot know whether that stored snapshot is trustworthy for querying: a calculator may depend on time, related objects, prices, or other external state, in which case the stored value goes stale and filtering on it would silently return wrong results.
