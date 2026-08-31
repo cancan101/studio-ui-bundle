@@ -17,6 +17,7 @@ import { type DynamicTypeFieldFilterObjectAdapter } from './definitions/field-fi
 import { type DynamicTypeFieldFilterDataObjectObjectBrick } from '@Pimcore/modules/element/dynamic-types/definitions/field-filters/types/data-object-brick/dynamic-type-field-filter-data-object-object-brick'
 import { type DynamicTypeFieldFilterString } from './definitions/field-filters/types/string/dynamic-type-field-filter-string'
 import { type DynamicTypeFieldFilterNone } from './definitions/field-filters/types/none/dynamic-type-field-filter-none'
+import { type DynamicTypeFieldFilterCalculatedValue } from './definitions/field-filters/types/calculated-value/dynamic-type-field-filter-calculated-value'
 import { type DynamicTypeFieldFilterId } from './definitions/field-filters/types/id/dynamic-type-field-filter-id'
 import { type DynamicTypeFieldFilterNumber } from './definitions/field-filters/types/number/dynamic-type-field-filter-number'
 import { type DynamicTypeFieldFilterFileSize } from './definitions/field-filters/types/file-size/dynamic-type-field-filter-file-size'
@@ -255,6 +256,7 @@ moduleSystem.registerModule({
     fieldFilterRegistry.registerDynamicType(container.get<DynamicTypeFieldFilterDatetime>(serviceIds['DynamicTypes/FieldFilter/Datetime']))
     fieldFilterRegistry.registerDynamicType(container.get<DynamicTypeFieldFilterTime>(serviceIds['DynamicTypes/FieldFilter/Time']))
     fieldFilterRegistry.registerDynamicType(container.get<DynamicTypeFieldFilterRelation>(serviceIds['DynamicTypes/FieldFilter/Relation']))
+    fieldFilterRegistry.registerDynamicType(container.get<DynamicTypeFieldFilterCalculatedValue>(serviceIds['DynamicTypes/FieldFilter/CalculatedValue']))
 
     const batchEditRegistry = container.get<DynamicTypeBatchEditRegistry>(serviceIds['DynamicTypes/BatchEditRegistry'])
 
