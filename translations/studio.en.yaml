@@ -883,6 +883,7 @@ layout-options: Layout Options
 allow-documents: Allow documents
 allow-assets: Allow assets
 asset-inline-download-allowed: Allow asset inline download
+asset-inline-upload-allowed: Allow asset inline upload
 allow-objects: Allow objects
 path-restriction: Path restriction
 result-limit: Result limit

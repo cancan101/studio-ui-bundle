@@ -883,6 +883,7 @@ layout-options: Opciones de diseño
 allow-documents: Permitir documentos
 allow-assets: Permitir assets
 asset-inline-download-allowed: Permitir descarga en línea de asset
+asset-inline-upload-allowed: Permitir subida en línea de asset
 allow-objects: Permitir objetos
 path-restriction: Restricción de ruta
 result-limit: Límite de resultados

@@ -883,6 +883,7 @@ layout-options: Layoutalternativ
 allow-documents: Tillåt dokument
 allow-assets: Tillåt assets
 asset-inline-download-allowed: Tillåt inline-nedladdning av asset
+asset-inline-upload-allowed: Tillåt inline-uppladdning av asset
 allow-objects: Tillåt objekt
 path-restriction: Sökvägsrestriktion
 result-limit: Resultatgräns
