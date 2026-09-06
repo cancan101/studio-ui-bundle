@@ -164,6 +164,8 @@ object.object-editor-tabs.children-listing: Children Grid
 workflow.label: Workflow
 workflow.headline: Workflow Details
 workflow.no-workflows-found: No workflows found
+workflow.unsaved-changes: The element has unsaved changes. Please save it before applying this action.
+workflow.unsaved-changes-save-failed: The unsaved changes could not be saved, the action was not applied.
 folder.folder-editor-tabs.preview: Preview
 folder.folder-editor-tabs.view: List
 toolbar.reload.confirmation: Are you sure you want to reload this tab? All unsaved changes will be lost.

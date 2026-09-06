@@ -28,12 +28,20 @@ interface WorkflowNotes {
   additionalFields?: WorkflowAdditionalField[]
 }
 
+/**
+ * What to do when a transition is triggered while the element has unsaved changes (transition option
+ * `unsavedChangesBehaviour`): refuse with a warning, save the changes as a draft first, or ignore them.
+ */
+export type WorkflowUnsavedChangesBehaviour = 'warn' | 'save' | 'ignore'
+
 export interface WorkflowAction {
   actionType: ActionType
   workflowId: string
   transitionId: string
   label: string
   notes?: WorkflowNotes
+  /** Only set for transitions; global actions have no such option. */
+  unsavedChangesBehaviour?: WorkflowUnsavedChangesBehaviour
 }
 
 export interface WorkflowActionData {
@@ -50,6 +58,17 @@ export interface WorkflowActionSubject {
   elementId: number
   elementType: string
   onApplied?: (action: WorkflowAction) => void
+  /**
+   * Whether the host currently holds unsaved changes for the element. Consulted for the transition's
+   * `unsavedChangesBehaviour`; a host that cannot tell leaves it undefined (changes are then ignored).
+   */
+  hasUnsavedChanges?: () => boolean
+  /**
+   * Saves the host's unsaved changes as a draft before a transition with `unsavedChangesBehaviour: save`
+   * is applied; rejects when saving fails. A host that cannot save leaves it undefined, the behaviour
+   * then falls back to `warn`.
+   */
+  saveUnsavedChanges?: () => Promise<void>
 }
 
 export interface WorkflowOptions {
@@ -63,7 +82,13 @@ interface ActionItem {
   name: string
   label: string
   notes?: WorkflowNotes
+  unsavedChangesBehaviour?: string
 }
+
+const unsavedChangesBehaviours: WorkflowUnsavedChangesBehaviour[] = ['warn', 'save', 'ignore']
+
+const toUnsavedChangesBehaviour = (value: string | undefined): WorkflowUnsavedChangesBehaviour | undefined =>
+  unsavedChangesBehaviours.find((behaviour) => behaviour === value)
 
 const createWorkflowAction = (
   actionType: ActionType,
@@ -74,7 +99,8 @@ const createWorkflowAction = (
   workflowId: workflowName,
   transitionId: item.name,
   label: item.label,
-  notes: isEmpty(item.notes) ? undefined : item.notes
+  notes: isEmpty(item.notes) ? undefined : item.notes,
+  unsavedChangesBehaviour: actionType === 'transition' ? toUnsavedChangesBehaviour(item.unsavedChangesBehaviour) : undefined
 })
 
 export const getWorkflowActions = (workflow: WorkflowDetails): WorkflowActionsList => {
