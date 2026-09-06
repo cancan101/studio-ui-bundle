@@ -883,6 +883,7 @@ layout-options: Layout-alternativer
 allow-documents: Tillat dokumenter
 allow-assets: Tillat ressurser
 asset-inline-download-allowed: Tillat innebygd nedlasting av ressurs
+asset-inline-upload-allowed: Tillat innebygd opplasting av ressurs
 allow-objects: Tillat objekter
 path-restriction: Stibegrensning
 result-limit: Resultatgrense

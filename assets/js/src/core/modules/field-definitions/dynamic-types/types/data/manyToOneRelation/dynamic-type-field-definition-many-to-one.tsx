@@ -28,7 +28,8 @@ export class DynamicTypeFieldDefinitionManyToOne extends DynamicTypeFieldDefinit
   getDefaultData (): FieldDefinitionData {
     return {
       ...super.getDefaultData(),
-      displayMode: 'grid'
+      displayMode: 'grid',
+      assetInlineUploadAllowed: true
     }
   }
 

@@ -112,6 +112,10 @@ export const FieldDefinitionManyToManyRelationFormFields = (props: FieldDefiniti
                 <Switch labelRight={ t('asset-inline-download-allowed') } />
               </Form.Item>
 
+              <Form.Item name="assetInlineUploadAllowed">
+                <Switch labelRight={ t('asset-inline-upload-allowed') } />
+              </Form.Item>
+
               <Form.Item
                 { ...relationSelectFormItemTransformation('assetTypes') }
                 label={ t('allowed-asset-types') }
