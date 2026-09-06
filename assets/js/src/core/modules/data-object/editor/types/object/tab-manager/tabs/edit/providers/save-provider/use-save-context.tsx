@@ -20,3 +20,6 @@ export const useSaveContext = (): ISaveContext => {
   }
   return context
 }
+
+/** Like {@link useSaveContext}, but returns undefined outside of a SaveProvider instead of throwing. */
+export const useOptionalSaveContext = (): ISaveContext | undefined => useContext(SaveContext)

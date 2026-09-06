@@ -43,6 +43,9 @@ export const useEditFormContext = (): EditFormContextProps => {
   return context
 }
 
+/** Like {@link useEditFormContext}, but returns undefined outside of an {@link EditFormProvider} instead of throwing. */
+export const useOptionalEditFormContext = (): EditFormContextProps | undefined => useContext(EditFormContext)
+
 export const EditFormProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [form] = Form.useForm()
   const modifiedDataObjectAttributesRef = useRef<Record<string, any>>({})
