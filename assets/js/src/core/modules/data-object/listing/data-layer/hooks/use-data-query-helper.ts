@@ -16,11 +16,12 @@ import { useClassDefinitionSelection } from '../../decorator/class-definition-se
 import { useData } from '@Pimcore/modules/element/listing/abstract/data-layer/provider/data/use-data'
 import { useAvailableColumns } from '@Pimcore/modules/element/listing/decorators/utils/column-configuration/context-layer/provider/available-columns/use-available-columns'
 import { useLanguageSelection } from '@Pimcore/components/language-selection'
+import { appConfig } from '@Pimcore/app/config/app-config'
 
 export const useDataQueryHelper: SettingsProviderProps['useDataQueryHelper'] = () => {
   const { useElementId } = useSettings()
   const { getId } = useElementId()
-  const { selectedColumns } = useSelectedColumns()
+  const { visibleColumns } = useSelectedColumns()
   const { availableColumns } = useAvailableColumns()
   const { selectedClassDefinition } = useClassDefinitionSelection()
   const { dataLoadingState, setDataLoadingState } = useData()
@@ -28,7 +29,7 @@ export const useDataQueryHelper: SettingsProviderProps['useDataQueryHelper'] = (
 
   const columnsArg: DataObjectGetGridApiArg['body']['columns'] = []
 
-  selectedColumns.forEach(column => {
+  visibleColumns.forEach(column => {
     let advancedColumnConfig: AdvancedColumnConfig | undefined
     let key = column.key
 
@@ -79,7 +80,7 @@ export const useDataQueryHelper: SettingsProviderProps['useDataQueryHelper'] = (
         filters: {
           includeDescendants: true,
           page: 1,
-          pageSize: 20
+          pageSize: appConfig.defaultPageSize
         }
       }
     }

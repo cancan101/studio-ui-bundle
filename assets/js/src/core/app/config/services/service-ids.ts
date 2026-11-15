@@ -174,6 +174,7 @@ export const serviceIds = {
   'DynamicTypes/BatchEdit/Datetime': 'DynamicTypes/BatchEdit/Datetime',
   'DynamicTypes/BatchEdit/Select': 'DynamicTypes/BatchEdit/Select',
   'DynamicTypes/BatchEdit/Checkbox': 'DynamicTypes/BatchEdit/Checkbox',
+  'DynamicTypes/BatchEdit/SystemBoolean': 'DynamicTypes/BatchEdit/SystemBoolean',
   'DynamicTypes/BatchEdit/ElementDropzone': 'DynamicTypes/BatchEdit/ElementDropzone',
   'DynamicTypes/BatchEdit/ClassificationStore': 'DynamicTypes/BatchEdit/ClassificationStore',
   'DynamicTypes/BatchEdit/DataObjectAdapter': 'DynamicTypes/BatchEdit/DataObjectAdapter',
@@ -195,6 +196,7 @@ export const serviceIds = {
   'DynamicTypes/GridCell/Select': 'DynamicTypes/GridCell/Select',
   'DynamicTypes/GridCell/MultiSelect': 'DynamicTypes/GridCell/MultiSelect',
   'DynamicTypes/GridCell/Checkbox': 'DynamicTypes/GridCell/Checkbox',
+  'DynamicTypes/GridCell/Radio': 'DynamicTypes/GridCell/Radio',
   'DynamicTypes/GridCell/Boolean': 'DynamicTypes/GridCell/Boolean',
   'DynamicTypes/GridCell/Date': 'DynamicTypes/GridCell/Date',
   'DynamicTypes/GridCell/Time': 'DynamicTypes/GridCell/Time',
@@ -407,6 +409,7 @@ export const serviceIds = {
   'DataObject/ProcessorRegistry/SaveDataProcessor': 'DataObject/ProcessorRegistry/SaveDataProcessor',
   'Asset/ProcessorRegistry/SaveDataProcessor': 'Asset/ProcessorRegistry/SaveDataProcessor',
   'Element/ProcessorRegistry/IconProcessor': 'Element/ProcessorRegistry/IconProcessor',
+  'Element/Listing/SearchModeRegistry': 'Element/Listing/SearchModeRegistry',
   'WidgetManager/ProcessorRegistry/PerspectiveProcessor': 'WidgetManager/ProcessorRegistry/PerspectiveProcessor',
 
   // AppLoader Registry

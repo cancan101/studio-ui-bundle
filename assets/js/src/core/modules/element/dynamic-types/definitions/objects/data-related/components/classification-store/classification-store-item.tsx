@@ -16,16 +16,20 @@ import { ObjectComponent } from '@Pimcore/modules/data-object/editor/types/objec
 import { useElementContext } from '@Pimcore/modules/element/hooks/use-element-context'
 import { BaseView } from '../../../layout-related/views/base-view'
 import { type ClassificationStoreGroupLayout2 } from '@Pimcore/modules/data-object/classification-store/classification-store-api-slice.gen'
-import { Icon } from '@Pimcore/components/icon/icon'
-import { Button } from '@Pimcore/components/button/button'
+import { IconButton } from '@Pimcore/components/icon-button/icon-button'
 import { Flex } from '@Pimcore/components/flex/flex'
 import { useKeyedListContext } from '@Pimcore/components/form/controls/keyed-list/provider/keyed-list/use-keyed-list-value'
 import { useFormModal } from '@Pimcore/components/modal/form-modal/hooks/use-form-modal'
 import { Panel } from '@Pimcore/components/panel/panel'
+import { CombinedFieldNameProvider } from '@Pimcore/modules/data-object/editor/types/object/tab-manager/tabs/edit/providers/combined-field-name-provider/combined-field-name-provider'
 import { useClassificationStore } from './provider'
 import { getHiddenKeyIds } from './utils/hide-empty-data'
+import { useStyles } from './classification-store-item.styles'
+import { getKeyCombinedFieldNameParent } from './utils/combined-field-name'
 
 export interface ClassificationStoreItemProps {
+  /** Field name of the classification store the group belongs to. */
+  classificationStoreName: string
   groupLayout?: ClassificationStoreGroupLayout2
   currentLayoutData: ClassificationStoreGroupLayout2[]
   updateCurrentLayoutData: (value: ClassificationStoreGroupLayout2[]) => void
@@ -35,16 +39,20 @@ export interface ClassificationStoreItemProps {
   hideEmptyDataRevision?: number
   /** Localization the group is currently edited in ('default' or a language). */
   localizationGroup?: string
+  /** Hides the delete button, e.g. when the store is not editable. */
+  disallowDelete?: boolean
 }
 
 export const ClassificationStoreItem = (props: ClassificationStoreItemProps): React.JSX.Element => {
   const {
+    classificationStoreName,
     groupLayout,
     currentLayoutData,
     updateCurrentLayoutData,
     hideEmptyData = false,
     hideEmptyDataRevision = 0,
-    localizationGroup = 'default'
+    localizationGroup = 'default',
+    disallowDelete = false
   } = props
 
   const { name } = useItem()
@@ -53,6 +61,7 @@ export const ClassificationStoreItem = (props: ClassificationStoreItemProps): Re
   const { isNewGroup } = useClassificationStore()
 
   const modal = useFormModal()
+  const { styles } = useStyles()
   const { t } = useTranslation()
 
   const fieldName: string = isArray(name) ? name[name.length - 1] : name
@@ -84,6 +93,11 @@ export const ClassificationStoreItem = (props: ClassificationStoreItemProps): Re
     return keys.filter((key) => !hiddenKeyIds.has(key.id))
   }, [groupLayout, hideEmptyData, hideEmptyDataRevision, localizationGroup, operations, isNewGroup])
 
+  const combinedFieldNameParent = useMemo(
+    () => getKeyCombinedFieldNameParent(classificationStoreName, groupLayout?.id ?? ''),
+    [classificationStoreName, groupLayout?.id]
+  )
+
   const handleClose: (e: React.MouseEvent<HTMLButtonElement>) => void = (e) => {
     e.stopPropagation()
 
@@ -103,30 +117,37 @@ export const ClassificationStoreItem = (props: ClassificationStoreItemProps): Re
         border={ false }
         collapsed={ false }
         collapsible
-        extra={ (
-          <Flex className='w-full'>
-            <Button
-              color="default"
-              icon={ <Icon value="trash" /> }
-              onClick={ handleClose }
-              variant="filled"
-            />
-          </Flex>
-        ) }
+        extra={ disallowDelete
+          ? undefined
+          : (
+            <Flex className='w-full'>
+              <IconButton
+                aria-label={ t('delete') }
+                className={ styles.deleteButton }
+                icon={ { value: 'trash' } }
+                onClick={ handleClose }
+                tooltip={ { title: t('delete') } }
+                type='action'
+              />
+            </Flex>
+            ) }
         extraPosition="start"
         theme='border-highlight'
         title={ groupLayout?.name }
       >
-        <Panel>
-          {visibleKeys.map((item) => (
-            <ObjectComponent
-              key={ item.id }
-              { ...item.definition }
-              name={ item.id }
-            />
-          ))}
-        </Panel>
+        <CombinedFieldNameProvider combinedFieldNameParent={ combinedFieldNameParent }>
+          <Panel>
+            {visibleKeys.map((item) => (
+              <ObjectComponent
+                key={ item.id }
+                { ...item.definition }
+                name={ item.id }
+                technicalName={ item.name }
+              />
+            ))}
+          </Panel>
+        </CombinedFieldNameProvider>
       </BaseView>
     )
-  }, [groupLayout, id, fieldName, currentLayoutData, visibleKeys])
+  }, [groupLayout, id, fieldName, currentLayoutData, visibleKeys, disallowDelete, combinedFieldNameParent])
 }

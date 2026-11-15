@@ -9,6 +9,7 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { appConfig } from '@Pimcore/app/config/app-config'
 import { Title } from '@Pimcore/components/title/title'
 import { t } from 'i18next'
 import { Flex } from '@Pimcore/components/flex/flex'
@@ -44,7 +45,7 @@ export const WebsiteSettingsContainer = (): React.JSX.Element => {
 
   const [nameFilter, setNameFilter] = useState<string>('')
   const [page, setPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(20)
+  const [pageSize, setPageSize] = useState<number>(appConfig.defaultPageSize)
   const [sorting, setSorting] = useState<SortingState>([])
 
   const onSortingChange = useCallback((newSorting: SortingState) => {
@@ -171,9 +172,11 @@ export const WebsiteSettingsContainer = (): React.JSX.Element => {
       renderToolbar={
         <Toolbar theme="secondary">
           <IconButton
+            aria-label={ t('toolbar.reload') }
             disabled={ websiteSettingsFetching }
             icon={ { value: 'refresh' } }
             onClick={ reload }
+            tooltip={ { title: t('toolbar.reload') } }
           />
           <Pagination
             current={ page }

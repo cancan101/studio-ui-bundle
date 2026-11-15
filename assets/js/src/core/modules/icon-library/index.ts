@@ -91,7 +91,9 @@ import checkbox from '@Pimcore/assets/icons/checkbox.inline.svg?react'
 import checkmark from '@Pimcore/assets/icons/checkmark.inline.svg?react'
 import chevronDown from '@Pimcore/assets/icons/chevron-down.inline.svg?react'
 import chevronLeft from '@Pimcore/assets/icons/chevron-left.inline.svg?react'
+import chevronLeftPipe from '@Pimcore/assets/icons/chevron-left-pipe.inline.svg?react'
 import chevronRight from '@Pimcore/assets/icons/chevron-right.inline.svg?react'
+import chevronRightPipe from '@Pimcore/assets/icons/chevron-right-pipe.inline.svg?react'
 import chevronSelectorHorizontal from '@Pimcore/assets/icons/chevron-selector-horizontal.inline.svg?react'
 import chevronUp from '@Pimcore/assets/icons/chevron-up.inline.svg?react'
 import childrenGrid from '@Pimcore/assets/icons/children-grid.inline.svg?react'
@@ -183,6 +185,8 @@ import draft from '@Pimcore/assets/icons/draft.inline.svg?react'
 import dragOption from '@Pimcore/assets/icons/drag-option.inline.svg?react'
 import dropTarget from '@Pimcore/assets/icons/drop-target.inline.svg?react'
 import duplicateAsset from '@Pimcore/assets/icons/duplicate-asset.inline.svg?react'
+import duplicatesConfiguration from '@Pimcore/assets/icons/duplicates-configuration.inline.svg?react'
+import embeddingConfiguration from '@Pimcore/assets/icons/embedding-configuration.inline.svg?react'
 import duplicateObject from '@Pimcore/assets/icons/duplicate-object.inline.svg?react'
 import dynamicPermission from '@Pimcore/assets/icons/dynamic-permission.inline.svg?react'
 import editAlt from '@Pimcore/assets/icons/edit-alt.inline.svg?react'
@@ -224,6 +228,7 @@ import folder from '@Pimcore/assets/icons/folder.inline.svg?react'
 import footprint from '@Pimcore/assets/icons/footprint.inline.svg?react'
 import forkKnife from '@Pimcore/assets/icons/fork-knife.inline.svg?react'
 import formatters from '@Pimcore/assets/icons/formatters.inline.svg?react'
+import fullTextSearch from '@Pimcore/assets/icons/full-text-search.inline.svg?react'
 import gdprExtractor from '@Pimcore/assets/icons/gdpr-extractor.inline.svg?react'
 import gender from '@Pimcore/assets/icons/gender.inline.svg?react'
 import genealogy from '@Pimcore/assets/icons/genealogy.inline.svg?react'
@@ -263,6 +268,8 @@ import inheritanceBroken from '@Pimcore/assets/icons/inheritance-broken.inline.s
 import inlineHelp from '@Pimcore/assets/icons/inline-help.inline.svg?react'
 import innovation from '@Pimcore/assets/icons/innovation.inline.svg?react'
 import inputQuantityValue from '@Pimcore/assets/icons/input-quantity-value.inline.svg?react'
+import insertAbove from '@Pimcore/assets/icons/insert-above.inline.svg?react'
+import insertBelow from '@Pimcore/assets/icons/insert-below.inline.svg?react'
 import integration2 from '@Pimcore/assets/icons/integration-2.inline.svg?react'
 import integration from '@Pimcore/assets/icons/integration.inline.svg?react'
 import interactionAction from '@Pimcore/assets/icons/interaction-action.inline.svg?react'
@@ -420,6 +427,7 @@ import save from '@Pimcore/assets/icons/save.inline.svg?react'
 import schedule from '@Pimcore/assets/icons/schedule.inline.svg?react'
 import scissorsCut01 from '@Pimcore/assets/icons/scissors-cut-01.inline.svg?react'
 import search from '@Pimcore/assets/icons/search.inline.svg?react'
+import searchReplace from '@Pimcore/assets/icons/search-replace.inline.svg?react'
 import security from '@Pimcore/assets/icons/security.inline.svg?react'
 import seemode from '@Pimcore/assets/icons/seemode.inline.svg?react'
 import segmentTagging from '@Pimcore/assets/icons/segment-tagging.inline.svg?react'
@@ -437,6 +445,8 @@ import shield from '@Pimcore/assets/icons/shield.inline.svg?react'
 import showDetails from '@Pimcore/assets/icons/show-details.inline.svg?react'
 import simpleRestService from '@Pimcore/assets/icons/simple-rest-service.inline.svg?react'
 import slider from '@Pimcore/assets/icons/slider.inline.svg?react'
+import smartSearchText from '@Pimcore/assets/icons/smart-search-text.inline.svg?react'
+import smartSearchVisual from '@Pimcore/assets/icons/smart-search-visual.inline.svg?react'
 import snack from '@Pimcore/assets/icons/snack.inline.svg?react'
 import snippet from '@Pimcore/assets/icons/snippet.inline.svg?react'
 import spinner from '@Pimcore/assets/icons/spinner.inline.svg?react'
@@ -598,6 +608,14 @@ moduleSystem.registerModule({
     iconLibrary.register({
       name: 'alternative-element-tree',
       component: alternativeElementTree
+    })
+    iconLibrary.register({
+      name: 'embedding-configuration',
+      component: embeddingConfiguration
+    })
+    iconLibrary.register({
+      name: 'duplicates-configuration',
+      component: duplicatesConfiguration
     })
     iconLibrary.register({
       name: 'appearance-branding',
@@ -824,8 +842,16 @@ moduleSystem.registerModule({
       component: chevronLeft
     })
     iconLibrary.register({
+      name: 'chevron-left-pipe',
+      component: chevronLeftPipe
+    })
+    iconLibrary.register({
       name: 'chevron-right',
       component: chevronRight
+    })
+    iconLibrary.register({
+      name: 'chevron-right-pipe',
+      component: chevronRightPipe
     })
     iconLibrary.register({
       name: 'chevron-selector-horizontal',
@@ -1356,6 +1382,10 @@ moduleSystem.registerModule({
       component: formatters
     })
     iconLibrary.register({
+      name: 'full-text-search',
+      component: fullTextSearch
+    })
+    iconLibrary.register({
       name: 'gdpr-extractor',
       component: gdprExtractor
     })
@@ -1510,6 +1540,14 @@ moduleSystem.registerModule({
     iconLibrary.register({
       name: 'input-quantity-value',
       component: inputQuantityValue
+    })
+    iconLibrary.register({
+      name: 'insert-above',
+      component: insertAbove
+    })
+    iconLibrary.register({
+      name: 'insert-below',
+      component: insertBelow
     })
     iconLibrary.register({
       name: 'integration-2',
@@ -2140,6 +2178,10 @@ moduleSystem.registerModule({
       component: search
     })
     iconLibrary.register({
+      name: 'search-replace',
+      component: searchReplace
+    })
+    iconLibrary.register({
       name: 'security',
       component: security
     })
@@ -2206,6 +2248,14 @@ moduleSystem.registerModule({
     iconLibrary.register({
       name: 'slider',
       component: slider
+    })
+    iconLibrary.register({
+      name: 'smart-search-text',
+      component: smartSearchText
+    })
+    iconLibrary.register({
+      name: 'smart-search-visual',
+      component: smartSearchVisual
     })
     iconLibrary.register({
       name: 'snack',

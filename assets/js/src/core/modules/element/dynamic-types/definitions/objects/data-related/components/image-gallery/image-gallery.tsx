@@ -27,6 +27,7 @@ import { uuid } from '@Pimcore/utils/uuid'
 import { toCssDimension } from '@Pimcore/utils/css'
 import { useStyles } from './image-gallery.styles'
 import { type DataTemplates } from '@Pimcore/modules/element/components/hotspot-markers-modal/hotspot-markers-modal'
+import { actionTooltipDelay } from '@Pimcore/components/tooltip/tooltip'
 
 export interface ImageGalleryProps {
   value?: ImageGalleryValue | null
@@ -39,6 +40,7 @@ export interface ImageGalleryProps {
   ratioY?: number
   predefinedDataTemplates?: DataTemplates | string | null
   uploadPath?: string
+  searchPath?: string
 }
 
 export type ImageGalleryValue = ImageGalleryValueItem[]
@@ -113,6 +115,7 @@ export const ImageGallery = (props: ImageGalleryProps): React.JSX.Element => {
         : (
           <Tooltip
             key="empty"
+            mouseEnterDelay={ actionTooltipDelay }
             title={ t('empty') }
           >
             <IconButton
@@ -167,6 +170,7 @@ export const ImageGallery = (props: ImageGalleryProps): React.JSX.Element => {
                 predefinedDataTemplates={ props.predefinedDataTemplates }
                 ratioX={ props.ratioX }
                 ratioY={ props.ratioY }
+                searchPath={ props.searchPath }
                 setInternalValue={ setInternalValue }
                 setValue={ handleChange }
                 uploadPath={ props.uploadPath }
@@ -181,6 +185,7 @@ export const ImageGallery = (props: ImageGalleryProps): React.JSX.Element => {
             disabled={ props.disabled }
             height={ height! }
             index={ internalValue.length }
+            searchPath={ props.searchPath }
             setValue={ handleChange }
             uploadPath={ props.uploadPath }
             value={ internalValue }

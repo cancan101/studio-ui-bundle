@@ -19,13 +19,40 @@ error.error_invalid_argument: Invalid argument
 error.error_widget_name_missing: Widget name have to be provided
 error.error_widget_name_invalid: Widget name is invalid (only alphanumeric characters, underscores and spaces are allowed, must be at least 3 characters long and less than 80 long)
 error.error_validation_failed: Validation failed
+error.error_response_not_json: The server returned an unexpected response that is not valid JSON.
+error.error_response_not_json_with_status: "The server returned an unexpected response that is not valid JSON (HTTP {{status}})."
 error.error_validation.email_failed: Please enter a valid email address
 error.error_element_not_found: Element not found
 error.error_document_language_not_set: The document has no language property set
 error.error_inconsistent_asset_type: Only assets of same type are allowed here.
 error.error_recycle_bin_restore: Cannot restore element from recycle bin
 error.error_recycle_bin_restore_missing_parent: Cannot restore element from recycle bin, parent element is missing
+error.error_login_token_as_admin_non_admin_user: Only admin users can generate a login link for an admin user
+error.error_login_token_no_user_password: A login link cannot be generated for this user because no password is set
 error.syntax_error: Syntax error
+validation.mandatory: "{{field}} is mandatory"
+validation.regex_mismatch: "{{field}} does not match the required pattern {{regex}}"
+validation.max_length: "{{field}} must not be longer than {{max}} characters"
+validation.min_length: "{{field}} must be at least {{min}} characters long"
+validation.not_numeric: "{{field}} must be a number, got {{value}}"
+validation.not_integer: "{{field}} must be a whole number, got {{value}}"
+validation.not_unsigned: "{{field}} must not be negative, got {{value}}"
+validation.min_value: "{{field}} must be at least {{min}}, got {{value}}"
+validation.max_value: "{{field}} must be at most {{max}}, got {{value}}"
+validation.range_start_after_end: "{{field}}: the start must not be after the end"
+validation.invalid_email: "{{field}} is not a valid email address: {{value}}"
+validation.invalid_option: "{{field}} has an invalid option: {{value}}"
+validation.invalid_time: "{{field}} is not a valid time: {{value}}"
+validation.invalid_relation: "{{field}} contains an invalid relation"
+validation.max_relations: "{{field}} allows at most {{max}} relations"
+validation.max_items: "{{field}} allows at most {{max}} items"
+validation.slug_not_unique: "The URL slug {{value}} in {{field}} is already in use"
+validation.slug_invalid: "{{field}} is not a valid URL slug"
+validation.slug_reserved_characters: "{{field}} contains reserved characters: {{characters}}"
+validation.unique_constraint: "A unique constraint is violated"
+validation.missing_required_editables: "Values for required editables are missing"
+validation.image_too_large: "Image {{filename}} is too large (max. {{max_megapixels}} megapixels). Resize it to {{suggested_width}}×{{suggested_height}} pixels or smaller"
+validation.and_more: "and {{n}} more"
 sidebar.selected_elements: Selected Elements
 sidebar.grid_config: Grid Config
 sidebar.tag_filters: Tag Filters
@@ -83,6 +110,13 @@ asset.upload.overwrite: Overwrite
 asset.upload.keep-both: Keep both
 asset.upload.skip: Skip
 asset.upload.apply-to-all: Apply to all
+asset.upload.files-exist.title: 'Files already exist'
+asset.upload.files-exist.message: '{{total}} of the selected files already exist in this folder. What do you want to do with them?'
+asset.upload.files-exist.more: 'and {{hidden}} more'
+asset.upload.review-each: 'Review each'
+asset.upload.skip-all: 'Skip all'
+asset.upload.keep-both-all: 'Keep both for all'
+asset.upload.overwrite-all: 'Overwrite all'
 asset.upload.checking-duplicate-file-names: "Checking for duplicate file names ... {{done}}/{{total}}"
 asset.upload.folder-drop.creating-folders: Creating folders
 asset.upload.folder-drop.creating-folders-hint: Please wait while the folder structure is being created…
@@ -102,6 +136,8 @@ areablock.move-below: Move below
 areablock.show: Show
 areablock.hide: Hide
 areablock.new: New
+areablock.insert-above: Insert above
+areablock.insert-below: Insert below
 areablock.copy: Copy
 areablock.paste: Paste
 areablock.cut: Cut
@@ -126,8 +162,8 @@ document.tree.context-menu.add-link: New Link
 document.tree.context-menu.add-hardlink: New Hardlink
 document.required-fields.validation-title: Required fields missing
 document.required-fields.validation-message: The following required fields must be filled before publishing
-document.site.remove-site: Remove site
-document.site.remove-site-confirmation: Are you sure you want to remove this site? This action cannot be undone.
+document.site.remove-site: Delete site
+document.site.remove-site-confirmation: Are you sure you want to permanently delete this site? This action cannot be undone.
 document.site.use-as-site: Use as site
 document.site.edit-site: Edit site
 document.site.form.main-domain: Main Domain
@@ -157,8 +193,8 @@ data-object.select-class-to-display: Select a class to display
 data-object.tree.context-menu.add-object: New Object
 data-object.tree.context-menu.add-variant: New Variant
 data-object.variant-listing.create-data-variant: New Variant
-data-object.create-data-object: Add new object of type {{className}}
-data-object.create-variant: Add new variant of type {{className}}
+data-object.create-data-object: New object of type {{className}}
+data-object.create-variant: New variant of type {{className}}
 data-object.object-editor-tabs.variants: Variants
 object.object-editor-tabs.children-listing: Children Grid
 workflow.label: Workflow
@@ -188,7 +224,7 @@ class-definition.import-file-label: Select JSON file
 class-definition.import-success: Class definition imported successfully
 class-definition.export-success: Class definition exported successfully
 class-definition.custom-layouts.default-layout: Default Layout
-class-definition.create-new: Create new class definition
+class-definition.create-new: New class definition
 class-definition.class-name: Class name
 class-definition.unique-identifier: Unique identifier
 class-definition.unique-identifier-warning: Be careful with the unique identifier because table names can contain only up to 64 characters.
@@ -244,7 +280,7 @@ class-definition.composite-indices.type-localized-query: Localized Query
 class-definition.composite-indices.type-store: Store
 class-definition.composite-indices.type-localized-store: Localized Store
 class-definition.composite-indices.index-label: Index
-field-collection.create-new: Create new field collection
+field-collection.create-new: New field collection
 field-collection.key: Key
 field-collection.validation.enter-key: Please enter a key
 field-collection.validation.key-format: The key must start with a letter and can contain only letters, numbers, and underscores.
@@ -258,7 +294,7 @@ field-collection.general-settings.implements-interfaces: Implements Interfaces
 field-collection.general-settings.usages.title: Usages
 field-collection.general-settings.usages.class: Class
 field-collection.general-settings.usages.field: Field
-object-brick.create-new: Create new object brick
+object-brick.create-new: New object brick
 object-brick.key: Key
 object-brick.validation.enter-key: Please enter a key
 object-brick.validation.key-format: The key must start with a letter and can contain only letters, numbers, and underscores.
@@ -273,7 +309,7 @@ object-brick.class-definitions-block.classname: Class
 object-brick.class-definitions-block.select-classname: Select class
 object-brick.class-definitions-block.fieldname: Field
 object-brick.class-definitions-block.select-fieldname: Select field
-select-option.create-new: Create new select option
+select-option.create-new: New select option
 select-option.id: ID
 select-option.enter-name-new-item: Enter the name of the new item
 select-option.validation.enter-id: Please enter an ID
@@ -309,6 +345,10 @@ custom-layout.empty-state.edit: Select an existing custom layout to start editin
 example-prefix: Example Prefix
 pagination.show-total: Total {{total}} items
 pagination.page: Page
+pagination.first-page: First page
+pagination.previous-page: Previous page
+pagination.next-page: Next page
+pagination.last-page: Last page
 pagination.showing-x-of-y: Showing {{loaded}} of {{total}}
 preview-card.locate-in-tree: Locate in Tree
 preview-card.rename: Rename
@@ -323,6 +363,8 @@ aria.asset.image-sidebar.tab.details.custom-thumbnail-format: Custom thumbnail f
 aria.asset.image-sidebar.tab.details.download-custom-thumbnail: Download custom thumbnail
 aria.asset.image-sidebar.tab.details.precreated-thumbnail: Select precreated thumbnail to download
 aria.asset.image-sidebar.tab.details.download-thumbnail: Download thumbnail
+aria.asset.image-sidebar.tab.details.downloadable-thumbnail: Select downloadable thumbnail
+aria.asset.image-sidebar.tab.details.download-downloadable-thumbnail: Download selected thumbnail
 notification.action-list.actions: Actions
 notification.action-list.cancel: Cancel
 notification.action-list.cancel-all: Cancel all
@@ -330,6 +372,7 @@ notification.action-list.completed-actions: Completed actions
 aria.notification.action-list.toggle-collapse: Toggle list of actions
 aria.notification.action-list.cancel-all: Cancel all currently running action
 aria.notification.action-list.cancel: Cancel action
+aria.stack-list.drag-handle: Drag to reorder
 asset.image.editor.zoom.reset: Reset
 aria.asset.image.editor.zoom.reset: Reset zoom
 aria.asset.image.editor.zoom.zoom-in: Zoom in
@@ -346,6 +389,7 @@ grid.filter.to: To
 grid.filter.is: Is
 grid.filter.less: Less than
 grid.filter.more: More than
+grid.filter.string.placeholder: Search, or paste a list with one value per line to match any of them exactly
 grid.filter.column: 'Filter {{column}}'
 grid.filter.file-size-unit.kb: KB
 grid.filter.file-size-unit.mb: MB
@@ -368,6 +412,7 @@ grid.advanced-column.advancedColumns.group.date: Date
 grid.advanced-column.advancedColumns.group.string: String
 grid.advanced-column.advancedColumns.group.other: Other
 grid.advanced-column.title.placeholder: Add a title
+grid.advanced-column.expand: Expand
 grid.advanced-column.advancedColumns: Source Field
 grid.advanced-column.advancedColumns.add: Add a source
 grid.advanced-column.transformers: Transformers
@@ -376,6 +421,7 @@ grid.advanced-column.preview: Preview
 grid.advanced-column.no-preview: No preview item available
 grid.advanced-column.no-preview-data: No preview data available
 grid.advanced-column.error-preview-data: Error loading preview
+grid.advanced-column.no-source-fields: Add a source field to see a preview.
 grid.advanced-column.preview-item: Preview item
 grid.advanced-column.trim: Trim
 grid.advanced-column.find: Find
@@ -426,6 +472,24 @@ login-form.username: Username
 login-form.password: Password
 aria.login-form-additional-logins.additional-login-provider: "Additional login provider:"
 aria.login-form-additional-logins.remember-me-checkbox: Remember me checkbox
+oauth.consent.title: Authorize access
+oauth.consent.subtitle: "{{client}} wants to access Pimcore as you."
+oauth.consent.unverified: Pimcore has not verified this application. Only continue if you started this from an application you trust.
+oauth.consent.redirect-to: "After you allow, you will be sent to {{host}}"
+oauth.consent.permissions-heading: "This will allow it to:"
+oauth.consent.no-scopes-warning: This application did not request specific permissions, so none can be listed. Only allow it if you trust it to act on your behalf.
+oauth.consent.signed-in-as: "Signed in as {{username}}"
+oauth.consent.allow: Allow
+oauth.consent.deny: Deny
+oauth.consent.scope.mcp-read.label: Read your data
+oauth.consent.scope.mcp-read.description: Read, list and search across the tools available to you.
+oauth.consent.scope.mcp-write.label: Modify your data
+oauth.consent.scope.mcp-write.description: Use tools that change data, still limited to your own permissions.
+oauth.consent.retry: Try again
+oauth.consent.error.load-failed: This authorization request could not be loaded.
+oauth.consent.error.decision-failed: Your decision could not be submitted. Please try again.
+oauth.consent.expired.title: This authorization request has expired
+oauth.consent.expired.description: Please start again from your application.
 unsaved-notice: Please save to confirm your changes
 widget-manager.tab-title.close-confirmation: You have unsaved changes, are you sure you want to close this tab?
 action-applied-successfully: Action applied successfully
@@ -433,6 +497,10 @@ action-could-not-be-applied: Action could not be applied
 failed-to-assign-tag-to-element: Failed to assign tag to element
 failed-to-un-assign-tag-to-element: Failed to un-assign tag to element
 workflow-modal.perform-action: Perform Action
+workflow.unsaved-changes.title: Unsaved changes
+workflow.unsaved-changes.warn: There are unsaved changes. They will be lost when this action is applied. Apply it anyway?
+workflow.unsaved-changes.apply-anyway: Apply anyway
+workflow.unsaved-changes.save-failed: The unsaved changes could not be saved, so the action was not applied.
 workflow-modal.cancel: Cancel
 workflow-modal.notes: Notes
 workflow-modal.notes-required: Please enter your notes
@@ -477,12 +545,14 @@ version.category.title.meta: Meta Data
 version.category.title.properties: Properties
 version.changed-attributes: "Changed attributes: {{attributes}}"
 aria.version.delete: Delete version
+aria.notes-and-events.delete: Delete note
+aria.card.close: Close
 aria.version.expand: Expand version
 clear-all: Clear all
 empty: Empty
 none: None
-yes: Yes
-no: No
+'yes': 'Yes'
+'no': 'No'
 by: By
 field: Field
 no-data-available: No Data Available
@@ -535,6 +605,8 @@ userModification: User modification
 userOwner: User owner
 listing.grid-config.convert-to-advanced: Convert to advanced column
 listing.grid-config.title: Grid Config
+listing.grid-config.search-mode-column.label: Automatic
+listing.grid-config.search-mode-column.tooltip: Added by the active search mode. You can move it like any other column; it is not saved with the grid configuration.
 grid-config.discard-all-changes: Discard all changes
 grid-config.apply-changes: Apply changes
 grid-config.reload: Reload
@@ -545,10 +617,18 @@ listing.column-picker.search: Search
 listing.column-picker.no-results: No columns found
 listing.column-picker.fields-to-add: Fields to add
 listing.fields-to-add.collapse-simple-fields: Collapse simple fields
+listing.search-mode.full-text: Full text search
+listing.search-mode.full-text-short: Full text
+listing.search-mode.default: Default
+listing.search-mode.smart-placeholder: Search within similar or related results
+listing.search-mode.global-unavailable: Smart search is currently unavailable.
 listing.actions: Apply to selection
 listing.non-selected.actions: Apply to all
 listing.actions.zip-download: ZIP Download
 listing.actions.delete: Delete
+listing.actions.delete-all: Delete all
+listing.actions.delete-all.not-allowed: "Some items in this folder are locked or you are not allowed to delete them."
+listing.actions.delete-all.empty: "This folder contains no items to delete."
 listing.actions.export: Export
 reports.csv-export-modal.title: CSV Export Options
 reports.csv-export-modal.include-headers: Include column headers
@@ -605,6 +685,60 @@ website-settings.columns.site: Site
 website-settings.columns.actions: Actions
 website-settings.website-settings.add-entry-mandatory-fields-missing.title: Mandatory fields missing
 website-settings.website-settings.add-entry-mandatory-fields-missing.error: Name and type are mandatory fields and need to be filled out.
+mcp-servers.rail.new-server: New server
+mcp-servers.placeholder: Select a server to view or edit its configuration.
+mcp-servers.tabs.empty: Select a server to view or edit its configuration.
+mcp-servers.tabs.new-server: New server
+mcp-servers.read-only-notice: Server definitions are file-managed on this environment and cannot be edited here.
+mcp-servers.save-success: MCP server saved
+mcp-servers.access.users-count: "Users: {{number}}"
+mcp-servers.access.roles-count: "Roles: {{number}}"
+mcp-servers.access.service-users-count: "Service users: {{number}}"
+mcp-servers.access.global-extra: any authenticated user
+mcp-servers.access.nobody: Nobody yet
+mcp-servers.badge.read: Read
+mcp-servers.badge.write: Write
+mcp-servers.editor.create-title: New MCP server
+mcp-servers.editor.edit-title: Edit MCP server
+mcp-servers.editor.general: General
+mcp-servers.editor.permissions: Permissions
+mcp-servers.editor.identity: Identity
+mcp-servers.editor.name: Name
+mcp-servers.editor.name-required: Please provide a name.
+mcp-servers.editor.url-slug: URL slug
+mcp-servers.editor.url-slug-required: Please provide a URL slug.
+mcp-servers.editor.url-slug-pattern: Only lowercase letters, numbers and hyphens are allowed.
+mcp-servers.editor.description: Description
+mcp-servers.editor.enabled: Active
+mcp-servers.editor.tools: Tools
+mcp-servers.editor.tools-placeholder: Select the tools this server exposes
+mcp-servers.editor.scopes: Advertised scopes
+mcp-servers.editor.scopes-empty: No scopes — select tools to derive the required scopes.
+mcp-servers.editor.url: Server URL
+mcp-servers.editor.copy-url: Copy server URL
+mcp-servers.editor.connect-hint: Point your MCP client at this URL and authenticate with your Pimcore account.
+mcp-servers.sharing.title: Sharing
+mcp-servers.sharing.share-globally: Share globally
+mcp-servers.sharing.share-globally-tooltip: Any authenticated user, including service users, gets Config Read and MCP Server Access (not Config Edit)
+mcp-servers.sharing.users: Users
+mcp-servers.sharing.roles: Roles
+mcp-servers.sharing.add-user: Add a user…
+mcp-servers.sharing.add-role: Add a role…
+mcp-servers.sharing.service-users: Service users
+mcp-servers.sharing.add-service-user: Add a service user…
+mcp-servers.sharing.service-users-hint: Service users can only connect; they cannot read or edit the configuration.
+mcp-servers.sharing.service-users-unavailable: Service users are not listed because you lack the user management permission. Their existing access is kept.
+mcp-servers.sharing.inactive: inactive
+mcp-servers.sharing.name: Name
+mcp-servers.sharing.config-read: Config Read
+mcp-servers.sharing.config-edit: Config Edit
+mcp-servers.sharing.mcp-access: MCP Server Access
+mcp-servers.sharing.level: Access level
+mcp-servers.sharing.read: Read
+mcp-servers.sharing.write: Can edit
+mcp-servers.sharing.who-can-access: Who can access
+mcp-servers.delete.title: Delete MCP server
+mcp-servers.delete.confirm: Are you sure you want to delete "{{name}}"?
 document-types.new: New
 document-types.columns.name: Name
 document-types.columns.group: Group
@@ -620,6 +754,7 @@ properties.label: Properties
 properties.editable-properties: Editable Properties
 properties.all-properties: All Properties
 properties.predefined-properties: Predefined Properties
+properties.predefined-properties.reload-error: Could not reload the predefined properties
 properties.new-custom-property: New custom property
 translations.columns.type: Type
 translations.columns.key: Key
@@ -675,13 +810,16 @@ button.confirm: Confirm
 button.save-apply: Save & apply
 button.add-edit: Add & edit
 button.cancel-edits: Cancel edits
-toggle.advanced-mode: Advanced mode
+toggle.pql-filter.enable: Enable PQL Filter
+toggle.pql-filter.disable: Disable PQL Filter
 actions.open: Open
 open: Open
 edit: Edit
 modify: Modify
 component.no-content.no-content-available: No content available
 notifications.label: Notifications
+notifications.tab.inbox: Inbox
+notifications.tab.settings: Settings
 notifications.settings.label: Notification settings
 notifications.settings.description: Turn on Notify me for anything you want in your notification bell, then add extra channels on top for the ones that matter most.
 notifications.settings.description-popup-only: Choose how notifications reach you. Anything you are notified about always shows in your notification bell.
@@ -697,7 +835,7 @@ notifications.settings.discard.keep-editing: Keep editing
 notifications.settings.unsaved-changes_one: '{{count}} unsaved change'
 notifications.settings.unsaved-changes_other: '{{count}} unsaved changes'
 notifications.settings.group.general: General
-notifications.remove-all: Remove all
+notifications.remove-all: Delete all
 notifications.new-notification: New Notification
 notifications.columns.title: Title
 notifications.columns.date: Date
@@ -726,6 +864,7 @@ tags.apply-tags-to-children: Apply tags to children
 tags.remove-and-apply-tags-to-children: Remove and apply tags to children
 tags.columns.path: Path
 tags.columns.actions: Remove
+tags.actions.delete: Remove tag
 csv-separated-options: CSV separated options
 csv-separated-options-info: The list of available options can be specified as comma-separated list, as single-column values or mixed. For the single-column way, the key will also be used as the value.
 add: Add
@@ -811,7 +950,7 @@ field-definitions.saved-successfully: Saved successfully.
 field-definitions.select-item-configuration: Select item configuration
 field-definitions.custom-layout-title: Custom Layout
 field-definitions.custom-layouts: Custom Layouts
-field-definitions.create-new-class-definition: Create new custom layout
+field-definitions.create-new-class-definition: New custom layout
 field-definitions.select-field-message: Please select a field from the tree to edit its properties.
 field-definitions.loading-general-settings: Loading general settings...
 field-definitions.type-not-supported: Type not supported
@@ -1036,6 +1175,8 @@ regex-flags-tooltip: "RegExp without delimiters, has to work in JS (Delimiter: #
 test-string: Test string
 regex-validation-error-message: The string does not match the required format.
 calculator-class: Calculator Class
+calculator-data: Calculator Data
+calculator-data-tooltip: Optional free-form data passed to the calculator, e.g. a plain value, a comma-separated list or a JSON encoded structure.
 calculator-expression: Calculator Expression
 calculator-type: Calculator Type
 calculator-type-tooltip: See the official documentation to learn more about defining expressions or classes.
@@ -1094,7 +1235,9 @@ asset.sidebar.original-file: Original File
 asset.sidebar.web-format: Web Format
 asset.sidebar.print-format: Print Format
 asset.sidebar.office-format: Office Format
+asset.sidebar.thumbnail-download: Thumbnail Download
 jobs.notification.title: Running jobs
+jobs.notification.tooltip: Open running jobs
 jobs.notification.jobs_one: "{{count}} Action"
 jobs.notification.jobs_other: "{{count}} Actions"
 jobs.notification.hide-all-finished: Hide all finished
@@ -1127,17 +1270,24 @@ jobs.zip-upload-job.title: Upload ZIP
 jobs.zip-upload-job.step1.title: Extracting ZIP
 jobs.zip-upload-job.step2.title: Creating assets
 jobs.download-csv-job.title: CSV export
+jobs.download-csv-job.title-with-context: "CSV export ({{name}})"
 jobs.download-xlsx-job.title: XLSX export
+jobs.download-xlsx-job.title-with-context: "XLSX export ({{name}})"
 jobs.download-zip-job.title: ZIP download
 batch-edit.modal-title: Batch edit
 batch-edit.no-content: There are no added columns yet
 batch-edit.modal-footer.apply-changes: Apply changes
 batch-edit.modal-footer.discard-all-changes: Discard all changes
 batch-edit.modal-footer.add-a-column: Add a column
+batch-edit.system-boolean.publish: "Publish"
+batch-edit.system-boolean.unpublish: "Unpublish"
+batch-edit.system-boolean.placeholder: "Select an action"
+batch-edit.system-boolean.required: "Choose Publish or Unpublish"
 batch-edit.append-mode.replace: Batch replace
 batch-edit.append-mode.add: Batch add
 batch-edit.append-mode.remove: Batch remove
 batch-delete.job-title: Delete
+element-move.job-title: Move
 export-csv-form.modal-title: Export CSV
 export-csv-form.export-notice: Please note that the export does not support some fields(e.g. preview, size). Press OK to continue with the export.
 export-csv-form.form-field.delimiter: Delimiter
@@ -1152,6 +1302,11 @@ export-xlsx-form.form-field.header: Header
 export-xlsx-form.form-field.header.option.name: System key
 export-xlsx-form.form-field.header.option.title: Label
 export-xlsx-form.form-field.header.option.no-header: No header
+form.optional-mark: (optional)
+form.annotation.added: Added
+form.annotation.changed: Changed
+form.annotation.removed: Removed
+form.annotation.moved: Moved
 form.validation.required: This field is required
 form.validation.max-length: The maximum length for this field is {{max}} characters
 form.validation.min: The minimum value is {{min}}
@@ -1175,6 +1330,7 @@ close-tab: Close Tab
 close-others: Close Others
 close-unmodified: Close Unmodified
 close-all: Close All
+use-full-space: Use Full Space
 asset.tree.context-menu.download: Download
 asset.tree.context-menu.download-as-zip: Download as ZIP
 element-selector.title.single: Select Element
@@ -1191,11 +1347,24 @@ element.tree.copy-success-description: '{{elementType}} "{{name}}" has been copi
 element.tree.paste: Paste
 element.tree.paste-as-child: Paste as child
 element.tree.paste-as-child-recursive: Paste as child (recursive)
+element.tree.open-no-permission: "You don't have permission to open this element."
 element.tree.paste-recursive-updating-references: Paste recursive, updating references
 element.tree.paste-only-contents: Paste only contents here
 element.tree.cut: Cut
 element.tree.cut-success-description: '{{elementType}} "{{name}}" has been cut and is ready to paste'
 element.tree.paste-cut: Paste cut-out element
+element.tree.cut-multiple: 'Cut {{count}} elements'
+element.tree.cut-multiple-success-description: '{{count}} elements have been cut and are ready to paste'
+element.tree.paste-cut-multiple: 'Paste {{count}} cut elements'
+element.tree.selection.count_one: '{{count}} element selected'
+element.tree.selection.count_other: '{{count}} elements selected'
+element.tree.selection.clear: Clear selection
+element.tree.selection.limit-reached: 'Maximum of {{limit}} elements reached'
+element.tree.drag.elements_one: '{{count}} element'
+element.tree.drag.elements_other: '{{count}} elements'
+element.tree.drag.elements-partial: '{{count}} of {{selected}} elements'
+element.tree.move.skipped-elements_one: '1 element was not moved: it is locked or you cannot edit it.'
+element.tree.move.skipped-elements_other: '{{count}} elements were not moved: they are locked or you cannot edit them.'
 element.lock: Lock
 element.lock-and-propagate-to-children: Lock and propagate to children
 element.unlock: Unlock
@@ -1216,10 +1385,13 @@ element.tree.refresh: Refresh
 element.new-folder: New Folder
 element.new-folder.validation: Please enter a valid name
 element.rename: Rename
+element.rename-folder: Rename Folder
 element.rename.label: Please enter the new name
 element.rename.validation: Please enter a valid name
 element.share-via-notification: Share via Notifications
 element.delete: Delete
+element.delete-folder: Delete Folder
+element.delete-multiple: 'Delete {{count}} elements'
 element.delete.confirmation.title: Delete item
 element.delete.confirmation.text: Do you really want to delete this item?
 element.delete.confirmation.ok: Delete permanently
@@ -1242,6 +1414,8 @@ element.delete.batch.show-paths: Show items
 element.delete.batch.dependencies-warning.confirmed_one: 'Please note: This item has dependencies.'
 element.delete.batch.dependencies-warning.confirmed_other: 'Please note: These items have dependencies.'
 element.open: Open
+element.state: State
+element.state.unpublished: Unpublished
 element.toolbar.copy-id: Copy ID
 element.toolbar.copy-full-path-to-clipboard: Copy full path
 element.toolbar.copy-deep-link-to-clipboard: Copy deep link
@@ -1262,6 +1436,7 @@ system-information.type: Type
 system-information.class-id: Class ID
 system-information.class: Class
 system-information.file-size: File Size
+system-information.checksum: Checksum
 system-information.modification-date: Modification Date
 system-information.creation-date: Creation Date
 system-information.user-modification: User Modification
@@ -1281,6 +1456,9 @@ success: Success
 no-value-set: No value set
 set-to-null: Empty (set to null)
 remove: Remove
+move-up: Move up
+move-down: Move down
+translate: Translate
 delete: Delete
 clone: Clone
 jobs.clone-job.step2.title: Updating references
@@ -1290,6 +1468,8 @@ jobs.data-object-clone-job.title: Cloning data objects
 latitude: Latitude
 longitude: Longitude
 search-address: Search address
+search-path: Search Path
+search-path-tooltip: Default asset folder for the search dialog of this field. It is applied as a pre-filled full path filter, which can be changed or removed in the search dialog.
 search: Search
 geocode.address-not-found: The entered address was not found
 geocode.possible-causes: Possible causes
@@ -1303,9 +1483,21 @@ relations.classname: Class
 relations.fullpath: Full Path
 relations.remove-all.confirm: Do you really want to delete all relations?
 relations.upload.subtype-not-allowed: Uploaded assets whose type this relation does not allow were not assigned.
+relations.create-object.title: New object
+relations.create-object.submit: Create
+relations.create-object.name: Name
+relations.create-object.parent: Parent
+relations.create-object.parent.placeholder: Select a parent
+relations.create-object.class: Class
+relations.visible-fields.loading: Loading visible fields…
+relations.visible-fields.loading-progress: 'Loading visible fields… ({{loaded}} of {{total}})'
+relations.visible-fields.error: The visible fields could not be loaded.
 relation: Relation
 items-limit-reached: The maximum number of items ({{maxItems}}) has been reached.
 asset-upload-type-not-allowed: The uploaded asset's type is not allowed for this field.
+relation.drop.not-allowed-elements-skipped_one: '1 element was not added: this field does not allow its type.'
+relation.drop.not-allowed-elements-skipped_other: '{{count}} elements were not added: this field does not allow their type.'
+drag-and-drop.drop.single-element-only: 'Only one element can be dropped here.'
 actions: Actions
 asset: Asset
 data-object: Data Object
@@ -1329,8 +1521,14 @@ upload.assets-items-failed-message: Upload finished with errors.
 quantity-value.converted-units: Converted Units
 table.empty.confirm: Are you sure you want to clear all data?
 table.new-column: New column
+table.insert-column-left: Insert column left
+table.insert-column-right: Insert column right
+table.column-insert-options: Column insert options
 table.delete-column: Delete column
 table.new-row: New row
+table.insert-row-above: Insert row above
+table.insert-row-below: Insert row below
+table.row-insert-options: Row insert options
 table.delete-row: Delete row
 table.duplicate-row: Duplicate row
 table.copy: Copy
@@ -1354,19 +1552,17 @@ tree.actions.user: User
 tree.actions.add-folder: New Folder
 tree.actions.add-tag: New Tag
 tree.actions.delete-tag: Delete
-tree.actions.rename-tag: Rename
 tree.actions.role: Role
 tree.actions.add-role: Add Role
 tree.actions.clone-role: Clone role
 tree.actions.remove-role: Delete role
-tree.actions.remove-folder: Remove Folder
+tree.actions.remove-folder: Delete Folder
 tag-configuration.new: New
 tag-configuration.new-tag: New Tag
 tag-configuration.name: Name
 tag-configuration.parent-tag: Parent Tag
 tag-configuration.create: Create
 tag-configuration.save: Save
-tag-configuration.rename: Rename tag
 tag-configuration.successful-add: Tag has been added successfully
 tag-configuration.successful-update: Tag has been updated successfully
 tag-configuration.successful-deletion: Tag has been deleted successfully
@@ -1472,6 +1668,11 @@ user-management.settings.language.abbreviation: Abbreviation
 user-management.settings.language.view: View
 user-management.settings.language.edit: Edit
 user-management.two-factor-authentication: Two Factor Authentication
+user-management.two-factor-authentication.reset: Reset two-factor authentication
+user-management.two-factor-authentication.reset.confirmation.title: Reset two-factor authentication
+user-management.two-factor-authentication.reset.confirmation.text: The user's authenticator app will no longer work for this account. If two-factor authentication is required, the user has to set it up again at the next login.
+user-management.two-factor-authentication.reset.success: Two-factor authentication has been reset
+user-management.two-factor-authentication.reset.error: Two-factor authentication could not be reset
 user-management.workspaces.documents: Documents
 user-management.workspaces.assets: Assets
 user-management.workspaces.objects: Data Objects
@@ -1498,7 +1699,9 @@ user-management.workspaces.localized-fields.edit: Edit permissions
 user-management.workspaces.custom-layouts: Custom Layouts
 user-management.workspaces.custom-layouts.select: Select one or more fields
 user-management.add-folder.success: Folder added successfully
-user-management.remove-folder.success: Folder removed successfully
+user-management.remove-folder: Delete folder
+user-management.remove-folder.text: 'Are you sure you want to permanently delete this folder? This action cannot be undone.'
+user-management.remove-folder.success: Folder deleted successfully
 user-management.clone-user: Clone user
 user-management.clone-user.text: Enter the name of the new user
 user-management.clone-user.success: User cloned successfully
@@ -1507,15 +1710,15 @@ user-management.save-user.password.success: Password updated successfully
 user-management.add-user.success: User added successfully
 user-management.remove-user: Delete user
 user-management.remove-user.text: 'Are you sure you want to permanently delete user "{{name}}"? This action cannot be undone.'
-user-management.remove-user.success: User removed successfully
+user-management.remove-user.success: User deleted successfully
 user-management.perspectives: Perspectives
 user-management.roles: Roles
 user-management.role: Role
 user-management.users: Users
 user-management.user: User
-user-management.add-folder: Add new folder
+user-management.add-folder: New folder
 user-management.add-folder.label: Enter the name of the new folder
-user-management.add-user: Add new user
+user-management.add-user: New user
 user-management.add-user.label: Enter the name of the new user
 user-management.last-login: Last Login
 user-management.search.id: ID
@@ -1526,16 +1729,18 @@ roles.clone-role: Clone role
 roles.clone-role.text: Enter the name of the new role
 roles.remove-role: Delete role
 roles.remove-role.text: 'Are you sure you want to permanently delete role "{{name}}"? This action cannot be undone.'
-roles.remove-folder.success: Folder removed successfully
+roles.remove-folder: Delete folder
+roles.remove-folder.text: 'Are you sure you want to permanently delete this folder? This action cannot be undone.'
+roles.remove-folder.success: Folder deleted successfully
 roles.remove-item.success: Role removed successfully
 roles.add-item.success: Role added successfully
 roles.add-folder.success: Folder added successfully
 roles.general: General
 roles.settings.title: Settings
 roles.workspaces.title: Workspaces
-roles.add-folder: Add new folder
+roles.add-folder: New folder
 roles.add-folder.label: Enter the name of the new folder
-roles.add-role: Add new role
+roles.add-role: New role
 roles.add-role.label: Enter the name of the new role
 roles.search.id: ID
 navigation.quick-access: Quick Access
@@ -1559,6 +1764,7 @@ navigation.appearance-branding: Appearance & Branding
 navigation.reporting: Reporting
 navigation.system: System
 navigation.website-settings: Website Settings
+navigation.mcp-servers: MCP Servers
 navigation.document-types: Document Types
 navigation.cache: Cache
 navigation.cache.clear-cache: Clear Cache
@@ -1647,6 +1853,7 @@ widget.predefined-properties: Predefined Properties
 widget.search-replace-assignments: Search & Replace Assignments
 widget.document-types: Document Types
 widget.website-settings: Website Settings
+widget.mcp-servers: MCP Servers
 widget.role-management: Roles
 widget.user-management: Users
 widget.class-definitions: Classes
@@ -1704,7 +1911,7 @@ image-thumbnails.editor.advanced: Advanced
 image-thumbnails.editor.quality: Quality
 image-thumbnails.editor.quality.tooltip: JPEG quality setting (1-100)
 image-thumbnails.editor.high-resolution: High Resolution
-image-thumbnails.editor.high-resolution.tooltip: High resolution factor for retina displays
+image-thumbnails.editor.high-resolution.tooltip: High resolution factor (e.g. for Web-to-Print or everywhere where srcset is not possible/sufficient). Not necessary for normal web thumbnails – they automatically get a srcset attribute with 1x and 2x.
 image-thumbnails.editor.preserve-color: Preserve Color
 image-thumbnails.editor.preserve-color.tooltip: "Preserve color (profile, space) (Imagick, ORIGINAL)\n('Preserve meta data' and 'preserve color' only works for transitions without compositions (frame, background color, ...) and color modifications (greyscale, sepia, ...))"
 image-thumbnails.editor.force-process-icc: Force Process ICC Profiles
@@ -1815,7 +2022,7 @@ image-thumbnails.transformations.effects.intensity: Intensity
 image-thumbnails.transformations.add: Add transformation
 image-thumbnails.transformations.move-up: Move up
 image-thumbnails.transformations.move-down: Move down
-image-thumbnails.transformations.remove: Remove
+image-thumbnails.transformations.remove: Delete
 
 # Unknown/Fallback Transformation
 image-thumbnails.transformations.unknown-type: "Unknown transformation type: {{type}}"
@@ -1851,7 +2058,7 @@ video-thumbnails.add.validation.message: The thumbnail name is invalid
 # Video Transformation tool strip
 video-thumbnails.transformations.move-up: Move up
 video-thumbnails.transformations.move-down: Move down
-video-thumbnails.transformations.remove: Remove
+video-thumbnails.transformations.remove: Delete
 
 # Resize Transformation
 video-thumbnails.transformations.resize.config-title: Configure resize
@@ -2035,6 +2242,8 @@ classification-store.select-key: Select key
 classification-store.search-keys: Search keys…
 classification-store.select-group: Select group
 classification-store.search-groups: Search groups…
+classification-store.store-id: "ID: {{id}}"
+classification-store.store-tab-label: "{{name}} (ID: {{id}})"
 home: Home
 preview.label: Preview
 preview.desktop: Desktop
@@ -2044,7 +2253,9 @@ preview.phone-horizontal: Phone horizontal
 preview.select_date_time: Select date & time
 preview.screen_size_too_small: The available space is too small to display the selected preview mode.
 inheritance-active: "Data inherited from object ID {{id}}"
+inheritance-active-unknown-origin: Data inherited from a parent object
 inheritance-broken: Data inheritance broken
+inheritance-restore: Restore
 main: Main
 main_admin: Main (Admin Mode)
 draft-alert: The current version is a draft. You can delete the draft to restore the previous version.
@@ -2087,6 +2298,7 @@ user-menu.notification.modal.form.validation.provide-title: Please provide a tit
 user-menu.notification.modal.form.validation.provide-message: Please provide a message
 reports.reports-title: Reports
 reports.select-report-name: Select the name of the report
+reports.report-load-failed: The report could not be loaded.
 reports.select-report: Select report
 reports.export: Export
 reports.csv-export: CSV Export
@@ -2100,6 +2312,9 @@ reports.field-filters: Field Filters
 reports.editor.delete.content: Do you really want to delete Custom Report "{{reportName}}"?
 reports.editor.clone.content: Enter the name of the new item (a-zA-Z-_)
 reports.editor.add.content: Enter the name of the new item. Name must be alphanumeric and at least 3 characters long (a-zA-Z0-9_-)
+reports.editor.import.title: Import Custom Report
+reports.editor.import.success: Custom report imported successfully
+reports.editor.import.invalid-file: Please select a JSON export file
 reports.editor.content.validation.message: The customer report name is invalid
 reports.editor.general-settings.title: General Settings
 reports.editor.general-settings.name-label: Name
@@ -2111,6 +2326,7 @@ reports.editor.general-settings.report-class-label: Report Class
 reports.editor.general-settings.group-icon-class-label: Group Icon Class
 reports.editor.general-settings.shortcut-menu-label: Create shortcut in menu
 reports.editor.source-definition.title: Source Definition
+reports.editor.source-definition.not-available: The source definition of this report is not available. The bundle that provides it may not be installed.
 reports.editor.source-definition.no-content: No available fields yet. Start by adding a field.
 reports.editor.source-definition.select-source-definition: Select a source definition
 reports.editor.source-definition.sql-select-field: SELECT (eg. a,b,c)*
@@ -2203,8 +2419,23 @@ user-profile.password-old: Old Password
 user-profile.password-new: New Password
 user-profile.password-repeat: Repeat Password
 user-profile.password-repeat-error: Passwords do not match
+user-profile.two-factor-authentication: Two-Factor Authentication
+user-profile.two-factor-authentication.status.active: Two-factor authentication is active for your account.
+user-profile.two-factor-authentication.status.inactive: Two-factor authentication is not set up for your account.
+user-profile.two-factor-authentication.required-hint: Two-factor authentication is required for your account, so it cannot be disabled.
+user-profile.two-factor-authentication.setup: Set up two-factor authentication
+user-profile.two-factor-authentication.renew: Renew authenticator key
+user-profile.two-factor-authentication.setup.description: Scan the QR code with your authenticator app and enter the {{digits}}-digit code to confirm.
+user-profile.two-factor-authentication.renew.description: Scan the QR code with your authenticator app and enter the {{digits}}-digit code to confirm. Your current key keeps working until the new one is confirmed.
+user-profile.two-factor-authentication.setup.success: Two-factor authentication has been set up
+user-profile.two-factor-authentication.disable: Disable two-factor authentication
+user-profile.two-factor-authentication.disable.confirmation.title: Disable two-factor authentication
+user-profile.two-factor-authentication.disable.confirmation.text: You will log in with your username and password only. You can set up two-factor authentication again at any time.
+user-profile.two-factor-authentication.disable.success: Two-factor authentication has been disabled
+user-profile.two-factor-authentication.disable.error: Two-factor authentication could not be disabled
 creatable-select.add-custom-option: Add custom option
-creatable-select.add: Add
+creatable-select.press-enter-to-add: Press Enter to add
+creatable-select.option-added: '{{label}} added'
 creatable-select.option-already-exists: Option already exists
 creatable-select.invalid-option: Invalid option
 drag-snippet-here: Drag a snippet here
@@ -2640,6 +2871,19 @@ forgot-password-form.username.placeholder: Username
 forgot-password-form.reset-password: Reset password
 forgot-password-form.success-message: A temporary login link has been sent to your email address. Please check your mailbox.
 forgot-password-form.back: Back to login
+two-factor-form.description: Enter the {{digits}}-digit code from your authenticator app
+two-factor-form.code.placeholder: Authentication code
+two-factor-form.code.required: Please enter the authentication code
+two-factor-form.code.invalid-format: The code must consist of {{digits}} digits
+two-factor-form.verify: Verify
+two-factor-form.error: The code could not be verified. Please try again.
+two-factor-form.too-many-attempts: Too many attempts. Please wait a few minutes before you try again.
+two-factor-form.back: Back to login
+two-factor-setup-form.description: Two-factor authentication is required for your account. Scan the QR code with your authenticator app and enter the {{digits}}-digit code to confirm.
+two-factor-setup-form.manual-entry: Or enter this key manually
+two-factor-setup-form.confirm: Activate
+two-factor-setup-form.load-error: Two-factor authentication could not be set up. Please try again later.
+two-factor-setup-form.expired: The setup has expired. Scan the new QR code and enter the code it shows.
 subscription-details.community-edition: Learn more about Pimcore Editions
 config_not_writeable: Not writable, this can have several reasons. For details please have a look into the docs.
 navigation.about: About
@@ -2845,10 +3089,12 @@ translations.merger.state.reverted: Reverted
 translations.merger.state.pending: Pending
 translations.merger.apply-all: Apply all
 translations.merger.revert-all: Revert all
+translations.merger.revert: Revert
 translations.merger.title: "Merge Translations (Domain: {{domain}})"
 translations.merger.column.language: Language
 translations.merger.items: items
 select.clear-selection: Clear selection
+select.select-all: Select all
 asset.folder.preview.image-display: Image display
 asset.folder.preview.image-display.small: Small
 asset.folder.preview.image-display.large: Large
@@ -2870,3 +3116,75 @@ saved-search.update.success: Saved search updated
 saved-search.delete.success: Saved search deleted
 saved-search.shared-modified.info: You have made modifications to the original configuration. Since it is owned by someone else, you can save it as a new search.
 saved-search.menu-shortcut-group: Menu group
+skip-to-content: Skip to content
+preview-mode.switch: Preview mode
+preview-mode.preview-item: Preview item
+preview-mode.no-item: No preview item available
+preview-mode.preview: Preview
+tag-configuration.move-under: 'Move under'
+tag-configuration.move-search-placeholder: 'Search for a tag'
+tree.actions.edit-tag: Edit
+tag-configuration.edit-tag: 'Edit "{{name}}"'
+tag-configuration.name-required: 'Please enter a tag name'
+tag-configuration.move-targets-failed: 'The list of tags could not be loaded, so only the name can be changed'
+navigation.service-users: Service Users
+widget.service-user-management: Service Users
+service-users.create: New
+service-users.create.title: New service user
+service-users.create.ok: Create
+service-users.create-from-user: From user
+service-users.create-from-user.title: New service user from a user
+service-users.create-from-user.description: 'Copies the permissions, roles and workspaces of the user. The user is not changed and admin rights are never copied.'
+service-users.field.name: Name
+service-users.field.name.fixed: 'The name cannot be changed, because MCP server access is granted by name.'
+service-users.field.name.invalid: 'Use up to 64 letters, digits, dots, hyphens or underscores, starting with a letter or a digit, for example svc-erp-sync.'
+service-users.field.email: Contact email
+service-users.field.source-user: User to copy from
+service-users.filter.unused-days: Unused for more than N days
+service-users.status.inactive: Inactive
+service-users.dormancy.never-used: Never used
+service-users.dormancy.warning: Unused for 90 days
+service-users.dormancy.dormant: Dormant
+service-users.tab.settings: Settings
+service-users.tab.permissions: Permissions
+service-users.tab.roles: Roles
+service-users.tab.workspaces: Workspaces
+service-users.roles: Roles
+service-users.save.success: Service user saved
+service-users.deactivate: Deactivate
+service-users.deactivate.confirm: 'Deactivate service user "{{name}}"? Its credentials stop working with the next request.'
+service-users.delete: Delete
+service-users.delete.confirm: 'Delete service user "{{name}}" permanently? Its OAuth client, its tokens and its MCP server access are removed. This cannot be undone.'
+service-users.credentials.title: Credentials
+service-users.credentials.client-id: Client ID
+service-users.credentials.last-used: Last used
+service-users.credentials.never-used: Never
+service-users.credentials.no-client: No OAuth client
+service-users.credentials.rotate: Rotate secret
+service-users.credentials.rotate.confirm: 'Create a new client secret for "{{name}}"? The current secret stops working at once.'
+service-users.credentials.mcp-tokens: MCP access tokens
+service-users.credentials.mcp-tokens.active: Active tokens
+service-users.credentials.mcp-tokens.latest-expiry: Latest expiry
+service-users.credentials.mcp-tokens.none: No active tokens
+service-users.credentials.issue: Issue token
+service-users.credentials.issue.title: Issue an MCP access token
+service-users.credentials.issue.ttl: Lifetime in days (1 to 90)
+service-users.credentials.issue.ttl.invalid: Enter a whole number of days from 1 to 90.
+service-users.credentials.issue.hint: The token is shown only once. Clients send it as a Bearer token in the Authorization header.
+service-users.credentials.revoke: Revoke all tokens
+service-users.credentials.revoke.confirm: Revoke every MCP access token of this service user? Connected clients stop working immediately.
+service-users.credentials.revoke.success: All MCP access tokens of the service user are revoked.
+service-users.credentials.oauth: OAuth client
+service-users.credentials.oauth.disabled: OAuth client credentials are disabled on this instance; use an MCP access token.
+service-users.credentials.oauth.rotate-hint: Access tokens already issued with the old secret stay valid until they expire.
+service-users.credentials.token: Access token
+service-users.credentials.token.expires: Expires
+service-users.create.credentials.title: Credentials
+service-users.create.credentials.skip: Skip, issue later
+service-users.create.credentials.which: 'Use the OAuth client for pipelines that can run the client_credentials grant; use an MCP access token for everything else.'
+service-users.create.credentials.token-description: 'Clients connect with an MCP access token. Issue one now, or later from the credentials of the service user.'
+service-users.secret.title: Client secret
+service-users.secret.client-secret: Client secret
+service-users.secret.warning: 'Copy the secret now. It is shown only once and cannot be displayed again.'
+service-users.secret.copy: Copy secret
+service-users.secret.close: Close

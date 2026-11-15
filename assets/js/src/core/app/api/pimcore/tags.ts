@@ -31,6 +31,7 @@ export const tagNames = {
   DATA_OBJECT_DETAIL: 'DATA_OBJECT_DETAIL',
   DATA_OBJECT_TREE: 'DATA_OBJECT_TREE',
   DATA_OBJECT_GRID: 'DATA_OBJECT_GRID',
+  DATA_OBJECT_GRID_COLUMNS: 'DATA_OBJECT_GRID_COLUMNS',
   DATA_OBJECT_GRID_CONFIGURATION: 'DATA_OBJECT_GRID_CONFIGURATION',
   DATA_OBJECT_GRID_CONFIGURATION_LIST: 'DATA_OBJECT_GRID_CONFIGURATION_LIST',
   DATA_OBJECT_GRID_CONFIGURATION_DETAIL: 'DATA_OBJECT_GRID_CONFIGURATION_DETAIL',
@@ -75,6 +76,8 @@ export const tagNames = {
   USER_DETAIL: 'USER_DETAIL',
   USER_TREE: 'USER_TREE',
   USER_OBJECT_DEPENDENCIES: 'USER_OBJECT_DEPENDENCIES',
+  SERVICE_USERS: 'SERVICE_USERS',
+  SERVICE_USER_DETAIL: 'SERVICE_USER_DETAIL',
   GDPR_DATA: 'GDPR_DATA',
   GDPR_DATA_DETAIL: 'GDPR_DATA_DETAIL',
   CLASS_DEFINITION: 'CLASS_DEFINITION',
@@ -122,6 +125,8 @@ export const providingTags = {
   DATA_OBJECT_TREE: () => [tagNames.DATA_OBJECT, tagNames.DATA_OBJECT_TREE],
   DATA_OBJECT_TREE_ID: (id: number) => [tagNames.DATA_OBJECT, { type: tagNames.DATA_OBJECT_TREE, id }],
   DATA_OBJECT_GRID_ID: (id: number) => [tagNames.DATA_OBJECT, { type: tagNames.DATA_OBJECT_GRID, id }],
+  // Available grid columns of a class; they carry the serialized class definition field settings.
+  DATA_OBJECT_GRID_COLUMNS_ID: (classId?: string) => [tagNames.DATA_OBJECT, { type: tagNames.DATA_OBJECT_GRID_COLUMNS, id: classId }],
   DATA_OBJECT_GRID_CONFIGURATION: () => [tagNames.DATA_OBJECT_GRID_CONFIGURATION],
   DATA_OBJECT_GRID_CONFIGURATION_LIST: () => [tagNames.DATA_OBJECT, tagNames.DATA_OBJECT_GRID_CONFIGURATION, { type: tagNames.DATA_OBJECT_GRID_CONFIGURATION_LIST }],
   DATA_OBJECT_GRID_CONFIGURATION_DETAIL: (configurationId?: number) => [tagNames.DATA_OBJECT, { type: tagNames.DATA_OBJECT_DETAIL }, tagNames.DATA_OBJECT_GRID_CONFIGURATION, { type: tagNames.DATA_OBJECT_GRID_CONFIGURATION_DETAIL, id: configurationId }],
@@ -174,6 +179,8 @@ export const providingTags = {
   USER_DETAIL: (id: number) => [{ type: tagNames.USER_DETAIL, id }],
   USER_TREE: () => [tagNames.USER_TREE],
   USER_OBJECT_DEPENDENCIES: (id: number) => [{ type: tagNames.USER_OBJECT_DEPENDENCIES, id }],
+  SERVICE_USERS: () => [tagNames.SERVICE_USERS],
+  SERVICE_USER_DETAIL: (id: number) => [{ type: tagNames.SERVICE_USER_DETAIL, id }],
   GDPR_DATA: (providerKey: string) => [{ type: tagNames.GDPR_DATA, id: providerKey }],
   GDPR_DATA_DETAIL: (providerKey: string, id: number) => [{ type: tagNames.GDPR_DATA_DETAIL, id: `${providerKey}-${id}` }],
   CLASS_DEFINITION: () => [tagNames.CLASS_DEFINITION],
@@ -212,7 +219,11 @@ export const invalidatingTags = {
   DATA_OBJECT_DETAIL_ID: (id: number) => [{ type: tagNames.DATA_OBJECT_DETAIL, id }, elementUnspecificDataTag],
   DATA_OBJECT_TREE: () => [tagNames.DATA_OBJECT_TREE],
   DATA_OBJECT_TREE_ID: (id: number) => [{ type: tagNames.DATA_OBJECT_TREE, id }],
+  DATA_OBJECT_GRID: () => [tagNames.DATA_OBJECT_GRID],
   DATA_OBJECT_GRID_ID: (id: number) => [{ type: tagNames.DATA_OBJECT_GRID, id }],
+  // Without a class id every class is affected, e.g. when an object brick or field collection changes.
+  DATA_OBJECT_GRID_COLUMNS: () => [tagNames.DATA_OBJECT_GRID_COLUMNS],
+  DATA_OBJECT_GRID_COLUMNS_ID: (classId: string) => [{ type: tagNames.DATA_OBJECT_GRID_COLUMNS, id: classId }],
   DATA_OBJECT_GRID_CONFIGURATION: () => [tagNames.DATA_OBJECT_GRID_CONFIGURATION],
   DATA_OBJECT_GRID_CONFIGURATION_DETAIL: (configurationId?: number) => [{ type: tagNames.DATA_OBJECT_GRID_CONFIGURATION_DETAIL, id: configurationId }, tagNames.DATA_OBJECT_GRID_CONFIGURATION],
   DATA_OBJECT_GRID_CONFIGURATION_LIST: () => [{ type: tagNames.DATA_OBJECT_GRID_CONFIGURATION_LIST }],
@@ -249,6 +260,7 @@ export const invalidatingTags = {
   ROLE: () => [tagNames.ROLE],
   PREDEFINED_ASSET_METADATA: () => [tagNames.PREDEFINED_ASSET_METADATA],
   ELEMENT_DETAIL: (elementType: ElementType, id: number) => [getElementDetailTag(elementType, id), getElementGridTag(elementType)],
+  ELEMENT_GRID_ID: (elementType: ElementType, id: number) => getElementGridIdTags(elementType, id),
   EMAIL_BLOCKLIST: () => [tagNames.EMAIL_BLOCKLIST],
   EMAIL_BLOCKLIST_DETAIL: (id: string) => [{ type: tagNames.EMAIL_BLOCKLIST_DETAIL, id }],
   APPLICATION_LOGGER: () => [tagNames.APPLICATION_LOGGER],
@@ -262,6 +274,8 @@ export const invalidatingTags = {
   USERS: () => [tagNames.USERS],
   USER_DETAIL: (id: number) => [{ type: tagNames.USER_DETAIL, id }],
   USER_TREE: () => [tagNames.USER_TREE],
+  SERVICE_USERS: () => [tagNames.SERVICE_USERS],
+  SERVICE_USER_DETAIL: (id: number) => [{ type: tagNames.SERVICE_USER_DETAIL, id }],
   GDPR_DATA: (providerKey: string) => [{ type: tagNames.GDPR_DATA, id: providerKey }],
   GDPR_DATA_DETAIL: (providerKey: string, id: number) => [{ type: tagNames.GDPR_DATA_DETAIL, id: `${providerKey}-${id}` }],
   CLASS_DEFINITION: () => [tagNames.CLASS_DEFINITION],
@@ -295,6 +309,18 @@ const getElementDetailTag = (elementType: ElementType, id: number): Tag => {
       return { type: tagNames.DATA_OBJECT_DETAIL, id }
     case 'document':
       return { type: tagNames.DOCUMENT_DETAIL, id }
+  }
+}
+
+// Children grid of a parent element; documents have no children grid.
+const getElementGridIdTags = (elementType: ElementType, id: number): Tag[] => {
+  switch (elementType) {
+    case 'asset':
+      return [{ type: tagNames.ASSET_GRID, id }]
+    case 'data-object':
+      return [{ type: tagNames.DATA_OBJECT_GRID, id }]
+    case 'document':
+      return []
   }
 }
 
